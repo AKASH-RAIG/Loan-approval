@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loan Status Predictor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #83a4d4, #b6fbff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        form {
+            background-color: #ffffffee;
+            padding: 30px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            margin-top: 15px;
+            font-weight: 600;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            transition: 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #2980b9;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 20px;
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            color: #2c3e50;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+    <h2>Loan Prediction Form</h2>
+
+    <form action="/predict" method="POST">
+        <label for="Gender">Gender</label>
+        <select name="Gender" required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="Married">Married</label>
+        <select name="Married" required>
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="Dependents">Dependents</label>
+        <input type="text" name="Dependents" placeholder="e.g., 0, 1, 2, 3+" required>
+
+        <label for="Education">Education</label>
+        <select name="Education" required>
+            <option value="">Select</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Not Graduate">Not Graduate</option>
+        </select>
+
+        <label for="Self_Employed">Self Employed</label>
+        <select name="Self_Employed" required>
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="ApplicantIncome">Applicant Income</label>
+        <input type="number" name="ApplicantIncome" step="any" required>
+
+        <label for="CoapplicantIncome">Coapplicant Income</label>
+        <input type="number" name="CoapplicantIncome" step="any" required>
+
+        <label for="LoanAmount">Loan Amount</label>
+        <input type="number" name="LoanAmount" step="any" required>
+
+        <label for="Loan_Amount_Term">Loan Amount Term</label>
+        <input type="number" name="Loan_Amount_Term" step="any" required>
+
+        <label for="Credit_History">Credit History</label>
+        <input type="number" name="Credit_History" min="0" max="1" required>
+
+        <label for="Property_Area">Property Area</label>
+        <select name="Property_Area" required>
+            <option value="">Select</option>
+            <option value="Urban">Urban</option>
+            <option value="Rural">Rural</option>
+            <option value="Semiurban">Semiurban</option>
+        </select>
+
+        <input type="submit" value="Check Loan Status">
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">
+        {{ prediction_text }}
+    </div>
+    {% endif %}
+</body>
+</html>
