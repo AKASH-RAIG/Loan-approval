@@ -1,6 +1,6 @@
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Get form values and store original income and loan values before scaling
+    # Get form values and store original income and loa values before scaling
     applicant_income = float(request.form['ApplicantIncome'])
     coapplicant_income = float(request.form['CoapplicantIncome'])
     loan_amount = float(request.form['LoanAmount'])
